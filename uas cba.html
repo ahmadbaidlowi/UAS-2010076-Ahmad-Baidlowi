@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {padding:10px 30px;}
+    </style>
+</head>
+<body>
+    <h2 align="center"><i><font color="blue">======Pemesanan Tiket Maskapai=======</font></i></h2>
+<form id="form">
+    <fieldset style="margin: 0 200px;">
+        <legend><h1><b><font color="red">DAQU AIRLINES</font></b></h1></legend>
+<table>
+    <tr>
+        <td>Nama Pemesan</td>
+        <td>:</td>
+        <td><input type="text" name="nama" size="30" id="nama"></td>
+        <td rowspan="6" widt="200px"><img src="Daqu Travel.png" alt="" width="400px" style="display:block; border-radius:5%; border-color: white; margin-right: 30px; border: 1px; "></td>
+    </tr>
+    <tr>
+        <td>Jumlah Tiket</td>
+        <td>:</td>
+        <td><input type="text" name="jtiket" size="30" id="jtiket"></td>
+    </tr>
+    <tr>
+        <td>Kelas</td>
+        <td>:</td>
+        <td><select name="kelas" id="kelas">
+            <option value="">-Silahkan Pilih Kelas-</option>
+            <option value="Ekonomi (Air Mineral)">Ekonomi</option>
+            <option value="Bisnis (Snack)">Bisnis</option>
+            <option value="Eksekutif (Makan)">Eksekutif</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>Tujuan</td>
+        <td>:</td>
+        <td><select name="tujuan" id="tujuan">
+            <option value="">-Silahkan Pilih Tujuan-</option>
+            <option value="DKI Jakarta">DKI Jakarta</option>
+            <option value="Bali">Bali</option>
+            <option value="Yogyakarta">Yogyakarta</option>
+            <option value="Surabaya">Surabaya</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>Bagasi</td>
+        <td>:</td>
+        <td><input type="radio" name="bagasi" value="5 Kg (Rp. 100.000)" id="">5 Kg <input type="radio" name="bagasi" value="10 Kg (Rp. 150.000)" id="">10 Kg <input type="radio" name="bagasi" value="15 Kg (Rp. 200.000)" id="">15 Kg
+    </tr>
+    <tr>
+        <td style="margin-top: -5px;">Asuransi</td>
+        <td>:</td>
+        <td><input type="checkbox" name="asuransi" value="asuransi jiwa" id="">Asuransi Jiwa<br>
+        <input type="checkbox" name="asuransi" value="asuransi kecelakaan" id="">Asuransi Kecelakaan<br>
+        <input type="checkbox" name="asuransi" value="asuransi Keterlambatan" id="">Asuransi Keterlambatan</td>
+    </tr>
+</table><br>
+
+    <input type="submit" value="Simpan"> 
+    <input type="reset" value="Batal">
+</fieldset>
+</form>
+</body>
+</html> 
+
+
+
+<script>
+    document.getElementById("form").onsubmit=submit
+
+    function submit(){
+        let nama=document.getElementById("nama").value
+        let jtiket=document.getElementById("jtiket").value
+        let kelas=document.getElementById("kelas").value
+        let tujuan=document.getElementById("tujuan").value
+        let bagasi=document.querySelector("input[name=bagasi]:checked")?document.querySelector("input[name=bagasi]:checked").value:""
+        let nasuransi=document.querySelectorAll("input[name=asuransi]:checked")
+        let asuransi=[]
+        for(let a=0;a<nasuransi.length;a++){
+            asuransi.push(nasuransi[a].value)
+        }
+
+            
+        if(kelas=="Ekonomi (Air Mineral)"){
+            hargatiket=jtiket*1000000;
+        } else if(kelas=="Bisnis (Snack)"){
+            hargatiket=jtiket*2000000;
+        } else if(kelas=="Eksekutif (Makan)"){
+            hargatiket=jtiket*3000000;
+        }
+
+        if(bagasi=="5 Kg (Rp. 100.000)"){
+            hargabagasi=100000;
+        } else if(bagasi=="10 Kg (Rp. 150.000)"){
+            hargabagasi=150000;
+        } else if(bagasi=="15 Kg (Rp. 200.000)"){
+            hargabagasi=200000;
+        }
+
+        let hargaasuransi=1*50000
+
+        let disc=""
+        if(jtiket>3){
+            disc=30/100*hargatiket;
+        }
+
+        
+        document.write(`Nama Pemesan : ${nama}<br>`);
+        document.write(`Jumlah Tiket : ${jtiket}<br>`);
+        document.write(`Kelas : ${kelas}<br>`);
+        document.write(`Tujuan :${tujuan}<br>`);
+        document.write(`Bagasi : ${bagasi}<br>`);
+        document.write(`Asuransi : ${asuransi.join(",")} <br>`);
+        document.write(`Total Harga : ${hargatiket-disc+hargabagasi+hargaasuransi}<br>`);
+    }
+
+</script>
